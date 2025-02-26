@@ -11,7 +11,8 @@
             margin: 0;
             padding: 0;
             background-color: #add8e6;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.3s;
+            color: black;
         }
         header {
             background: #1e90ff;
@@ -21,9 +22,9 @@
         }
         .container {
             margin: 50px auto;
-            max-width: 600px;
+            max-width: 700px;
             background: white;
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
         }
@@ -32,23 +33,24 @@
             height: auto;
             border-radius: 10px;
             margin-top: 20px;
+            display: block;
         }
         .buttons {
             margin-top: 20px;
         }
         .dark-mode {
             background-color: #333;
-            color: white;
+            color: black;
         }
     </style>
 </head>
 <body>
-    <header id="header">Welcome to My Portfolio</header>
+    <header id="header">My Portfolio</header>
     <div class="container">
-        <h2 id="greeting">Hello, I'm Alikhan!</h2>
-        <p id="description">I study at BIL and I'm passionate about learning and growing my skills.</p>
-        <h3 id="interest">I Love Nissan Cars</h3>
-        <img src="/mnt/data/Screenshot_dwg_nissan_silvia_s13_ss_ek_tsukuba_fruits_line_28-8-124-21-40-54.jpg" alt="Nissan Silvia S13">
+        <h2 id="greeting">Hello, I am Alikhan!</h2>
+        <p id="description">I study at BIL </p>
+        <h3 id="interest">I love Nissan Cars</h3>
+        <img src="nissan_car.jpg" alt="Nissan Silvia S13">
         <div class="buttons">
             <button onclick="toggleLanguage()">Change Language</button>
             <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
@@ -59,14 +61,14 @@
         function toggleLanguage() {
             if (isEnglish) {
                 document.getElementById("header").textContent = "Мое портфолио";
-                document.getElementById("greeting").textContent = "Привет я Алихан";
+                document.getElementById("greeting").textContent = "Привет, я Алихан!";
                 document.getElementById("description").textContent = "Я учусь в BIL ";
-                document.getElementById("interest").textContent = "Я люблю автомобили Nissan";
+                document.getElementById("interest").textContent = "Я люблю машинки Nissan";
             } else {
-                document.getElementById("header").textContent = "My Portfolio";
-                document.getElementById("greeting").textContent = "Hello, I am Alikhan!";
-                document.getElementById("description").textContent = "I study at BIL";
-                document.getElementById("interest").textContent = "I Love Nissan Cars";
+                document.getElementById("header").textContent = "Welcome to My Portfolio";
+                document.getElementById("greeting").textContent = "Hello, I'm Alikhan!";
+                document.getElementById("description").textContent = "I study at BIL ";
+                document.getElementById("interest").textContent = "I love Nissan Cars";
             }
             isEnglish = !isEnglish;
         }
