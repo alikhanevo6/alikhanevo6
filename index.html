@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>McDonnell Douglas F-15A Eagle - Text Search</title>
+  <title>BMW E92 335i - Text Search</title>
   <script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
   <style>
     body {
@@ -28,3 +28,61 @@
     }
     #searchResults {
       background-color: #3a3a3a;
+      border: 1px solid #666;
+      padding: 15px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: #f0f0f0;
+    }
+    mark {
+      background-color: #ffdd57;
+      color: #000;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Text Search</h1>
+
+  <textarea id="textInput" rows="10" placeholder="Paste text here...">The E92 335i was the first 3 Series model produced with a turbocharged petrol engine.[9] It was also the first 3 Series to include the iDrive operating system, which consists of navigation, infotainment and essential vehicle functions.[10] The E9x saw the introduction of run-flat tyres to the 3 Series range. Models with run-flat tires are not equipped with a spare tyre.
+
+The E90/E92/E93 M3 is the only generation of M3 to be powered by a V8 engine. Introduced in 2007,[11] it uses the BMW S65 naturally aspirated V8 engine and was produced in saloon, coupé and convertible body styles.[12]</textarea>
+
+  <input type="text" id="wordInput" placeholder="Enter word to search">
+  <button onclick="performSearch()">Search</button>
+
+  <div id="searchResults">Results will appear here...</div>
+
+  <script>
+    let pyodide;
+    async function main() {
+      pyodide = await loadPyodide();
+      await pyodide.runPythonAsync(`
+def search_text(text, word):
+    word = word.strip().lower()
+    results = []
+    for line in text.splitlines():
+        original = line.strip()
+        if word.lower() in original.lower():
+            highlighted = original.replace(word, f"<mark>{word}</mark>")
+            results.append("→ " + highlighted)
+    return "\\n".join(results) if results else "No matches found."
+`);
+    }
+    main();
+
+    async function performSearch() {
+      const text = document.getElementById("textInput").value;
+      const word = document.getElementById("wordInput").value;
+
+      try {
+        const result = await pyodide.globals.get("search_text")(text, word);
+        document.getElementById("searchResults").innerHTML = result;
+      } catch (err) {
+        document.getElementById("searchResults").textContent = "Error: " + err;
+      }
+    }
+  </script>
+</body>
+</html>
+
